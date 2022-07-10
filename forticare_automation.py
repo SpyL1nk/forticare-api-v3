@@ -83,7 +83,7 @@ def init_forticare(file=".forticare"):
     section = "forticare"
 
     # FortiCare API Version 3 uses two URL :
-    # 1/ https://customerapiauth.fortinet.com/api/v1/oauth/token/ : For the authentication
+    # 1/ https://customerapiauth.fortinet.com/api/v1/oauth/ : For the authentication
     # 2/ https://support.fortinet.com/ES/api/registration/v3/ : For the FortiCare API Calls
 
     try:
@@ -142,7 +142,7 @@ def forticare_login(customerauth_url, forticare_client_id, forticare_api_id, for
     logger.debug("Payload to post is:")
     logger.debug(json.dumps(json_payload, indent=4))
 
-    url = customerauth_url
+    url = customerauth_url + "token/"
     r = requests.post(url=url, json=json_payload)
 
     logger.debug('FortiCare login operation terminated with "%s"' % r.json()["message"])
