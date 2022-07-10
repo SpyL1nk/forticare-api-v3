@@ -8,7 +8,7 @@ Technical information can be found on this KB : https://community.fortinet.com/t
 
 Full API documentation can be found on the Fortinet Developer Network (FNDN) : https://fndn.fortinet.net/index.php?/fortiapi/55-forticare-registration/ (requires an account)
 
-This scripts currently extract "all" assets available on the tenant and save it into a file named `assets.json` in the working directory.
+This scripts currently extract "all" assets available on the tenant and save it into a file named `assets.csv` in the working directory.
 
 It can be modified to get more details on a specific product, register licence or even decomission a product.
 

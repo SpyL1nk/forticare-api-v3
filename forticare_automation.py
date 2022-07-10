@@ -22,6 +22,7 @@ import logging
 import os
 import re
 import sys
+import csv
 from optparse import OptionParser
 
 def init_logging():
@@ -188,6 +189,18 @@ def forticare_list_assets(forticare_url, forticare_bearer_token):
 
     return r.json()['assets']
 
+
+def assets_to_csv(assets_list):
+    csv = []
+    csv.append(['Serial Number', 'Description', 'Model', 'Decommissioned', 'Register Date'])
+    for asset in assests_list:
+        csv_asset = [asset['serialNumber'], asset['description'], asset['productModel'],
+            asset['isDecommissioned'], asset['registrationDate']]
+        csv.append(csv_asset)
+
+    return csv
+
+
 if __name__ == "__main__":
 
     init_logging()
@@ -199,6 +212,10 @@ if __name__ == "__main__":
 
     assests_list = forticare_list_assets(forticare_url, forticare_bearer_token)
 
-    with open('assets.json', 'w', encoding='utf-8') as f:
-        json.dump(assests_list, f, ensure_ascii=False, indent=4)
+    csv_assets = assets_to_csv(assests_list)
+
+    with open('assets.csv', 'w', newline='', encoding='utf-8') as f:
+        write = csv.writer(f, delimiter =';')
+        write.writerows(csv_assets)
+        
 
